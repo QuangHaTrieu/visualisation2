@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Tourism in Australia in 2023 - 2024 </title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+  <!--Import javacript-->
+  <script src="vega_lite_vis.js"></script>
+  <script src="parallel.js"></script>
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>Tourism in Australia</h1>
+        <p>This page demonstrates the number of visitors coming to Australia in 2023 and 2024</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <!--First row, line chart-->
+      <div class="pure-u-2-3">
+        <div id="line" class="vis-container"></div>
+      </div>
+
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Tourism in Australia from 2008 to 2024</h2>
+          <p> The tourism industry in Australia significantly contributes to the economy, generating $36.5 billion
+             and supporting 713,000 jobs in 2021-22. Despite challenges from the COVID-19 pandemic, the sector is 
+             recovering and is expected to exceed pre-pandemic levels by 2025. Tourism is vital for regional economies,
+              with a substantial portion of tourism spending occurring in regional areas. </p>
+        </div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <!--Pie chart-->
+        <div class="pure-u-2-3">
+            <div id="pie" class="vis-container"></div>
+        </div>
+
+        <!--Text-->
+        <div class="pure-u-1-3">
+            <div class="description description-left">
+                <h2>Where did visitors stay in Australia</h2>
+                <p>Visitors to Australia predominantly stay with friends or relatives, accounting for 33% of the total nights spent.
+                Hotels, resorts, motels, and motor inns are the second most popular choice, making up 23% of the total. Rented
+                accommodations follow closely at 21%, while other types of lodging represent 17%. Caravan parks and commercial
+                camping grounds are the least common, with 6% of visitors choosing this option.</p>
+            </div>
+        </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <!--map-->
+    <div class="pure-g">
+        <div class="pure-u-2-3">
+            <div id="map" class="vis-container"></div>
+        </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <!--slope chart-->
+        <div class="pure-u-2-3">
+            <div id="slope" class="vis-container"></div>
+        </div>
+
+        <!--Text-->
+        <div class="pure-u-1-3">
+            <div class="description description-left">
+                <h2>The most recent change in number of visitors to each regions</h2>
+                <p>From 2023 to 2024, New South Wales saw a notable increase in visitors from 36,367 to 40,840. Victoria and
+                    Queensland also experienced growth, with visitor numbers rising to 31,002 and 27,712, respectively. Other
+                    states like South Australia and Tasmania had modest increases, while Western Australia and the Northern
+                    Territory remained relatively stable.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <!--slope chart-->
+        <div class="pure-u-2-3">
+            <div id="parallel" class="vis-container"></div>
+        </div>
+
+        <!--Text-->
+        <div class="pure-u-1-3">
+            <div class="description description-left">
+                <h2>Why people travel to different states</h2>
+                <p>Visitors travel to different Australian states primarily for holidays, with New South Wales (NSW) attracting
+                    the most holiday visitors. Visiting friends and relatives is another major reason, especially in NSW and
+                    Victoria (VIC). Business travel is significant in NSW and Queensland (QLD). Overall, holidays and visiting
+                    friends and relatives are the top reasons for travel across all states</p>
+            </div>
+        </div>
+    </div>
+  </div> <!-- end page -->
+
+  <script type="text/javascript">
+    var specVis1 = "./normalised-stacked-bars-responsive.json";
+    var specVis2 = "./line-chart-responsive.json";
+
+    vegaEmbed('#vis1', specVis1, { "actions": false });
+
+    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis3', specVis1, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+</body>
+
+</html>

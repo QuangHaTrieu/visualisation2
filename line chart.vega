@@ -1,0 +1,143 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "The change in the annual number of visitors in Australia from 2008 to 2024",
+  "data": {
+    "url": "https://raw.githubusercontent.com/QuangHaTrieu/visualisation-2/refs/heads/main/data_line.csv"
+  },
+  "vconcat": [
+    {
+      "width": 480,
+      "height": 300,
+      "title": "The change in tourism industry of Australia in 2008 to 2024",
+      "layer": [
+        {
+          "mark": "line",
+          "encoding": {
+            "x": {
+              "field": "year_dom",
+              "type": "temporal",
+              "axis": {
+                "title": ""
+              }
+            },
+            "y": {
+              "field": "trips_dom",
+              "type": "quantitative",
+              "axis": {
+                "title": "domestic visitors"
+              }
+            },
+            "tooltip": [
+                        {"field": "trips_dom", "type": "quantitative", "title": "Domestic visitors"},
+                        {"field": "year_dom", "type": "temporal", "title": "Year", "timeUnit": "year"}
+                       ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 270,
+            "dy": 0  
+          },
+          "encoding": {
+            "x": {
+              "datum": "2010-01-01T00:00:00",
+              "type": "temporal"
+            },
+            "y": {
+              "datum": 70000,
+              "type": "quantitative"
+            },
+            "text": {
+              "value": "Significant drop due to COVID (2019-2022)"
+            },
+            "color": {
+              "value": "Black"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 150,
+            "dy": 50  
+          },
+          "encoding": {
+            "x": {
+              "datum": "2008-01-01T00:00:00",
+              "type": "temporal"
+            },
+            "y": {
+              "datum": 50000,
+              "type": "quantitative"
+            },
+            "text": {
+              "value": "Upward trend from 2008 to 2024"
+            },
+            "color": {
+              "value": "Black"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "width": 480,
+      "height": 60,
+      "layer": [
+        {
+          "mark": "line",
+          "encoding": {
+            "x": {
+              "field": "Year_int",
+              "type": "temporal",
+              "axis": {
+                "title": " Year"
+              }
+            },
+            "y": {
+              "field": "trips_int",
+              "type": "quantitative",
+              "axis": {
+                "title": "international visitors"
+              },
+              "scale": {
+                "domain": [0, 10000]
+              }
+            },
+            "tooltip": [
+                        {"field": "trips_int", "type": "quantitative", "title": "International visitors"},
+                        {"field": "Year_int", "type": "temporal", "title": "Year", "timeUnit": "year"}
+                       ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 10,
+            "dy": 10  
+          },
+          "encoding": {
+            "x": {
+              "datum": "2009-01-01T00:00:00",
+              "type": "temporal"
+            },
+            "y": {
+              "datum": 4000,
+              "type": "quantitative"
+            },
+            "text": {
+              "value": "Except for COVID period, slight decrease over time"
+            },
+            "color": {
+              "value": "Black"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "height":300,
+  "width":400,
+  "description": "Pie Chart with percentage_tooltip",
+  "data": {
+   "url": "https://raw.githubusercontent.com/QuangHaTrieu/visualisation-2/refs/heads/main/pie_chart.csv"
+  },
+  "mark": {"type": "arc"},
+  "title": "Where visitors stay in Australia in 2024",
+  "encoding": {
+    "theta": {"field": "total", "type": "quantitative", "stack": "normalize"},
+    "color": {"field": "category", "type": "nominal", "title":"Type of accommodation"},
+    "tooltip": [
+      {"field": "category", "type": "nominal", "title": "Accommodation Type"},
+      {"field": "total", "type": "quantitative", "title": "Number of Visitors"},
+      {
+        "field": "percent",
+        "type": "nominal",
+        "title": "Percentage"
+      }
+    ]
+  }
+}

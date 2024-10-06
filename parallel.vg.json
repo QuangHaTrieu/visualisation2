@@ -1,0 +1,113 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Parallel coordinates plot for travel purposes across different Australian states/territories.",
+    "data": {
+      "url": "https://raw.githubusercontent.com/QuangHaTrieu/homework_w10/refs/heads/main/newdata_w10.csv",
+      "format": {"type": "csv", "parse": {"value": "number"}}
+    },
+    "params": [
+        {
+          "name": "purpose_selection",
+          "bind": {
+            "input": "select",
+            "options": [
+              null,
+              "Business",
+              "Holiday",
+              "Other",
+            "Total",
+            "Visiting friends and relatives"
+          ],
+          "labels":[
+            "Show All",
+            "Business",
+            "Holiday",
+            "Other",
+            "Total",
+            "Visiting friends and relatives"
+  ],
+          "name": "Purpose Selection: "
+        }
+  } ],
+    "width": 400,
+    "height": 300,
+    "title": "The number of trips by purpose to different regions",
+    "transform": [
+      {"fold": ["Holiday","Visiting friends and relatives","Business","Other","Total"], "as": ["Purpose", "Value"]},
+        {
+      "calculate": "toNumber(datum.Value)",
+      "as": "numeric_value"
+    },
+      {
+        "joinaggregate": [
+          {"op": "max", "field": "numeric_value", "as": "max"},
+          {"op": "min", "field": "numeric_value", "as": "min"}
+        ],
+        "groupby": ["Purpose"]
+      },
+      {
+        "calculate": "(datum.numeric_value - datum.min) / (datum.max - datum.min)",
+        "as": "norm_val"
+      },
+    {
+      "filter": "purpose_selection == null || datum.Purpose == purpose_selection"},
+      {
+        "calculate": "'The highest number of trips in ' + datum['Purpose'] + ' ' + 'is ' + datum['max']", 
+        "as": "text_annotation"
+      }, 
+      {
+        "calculate": "'The highest among all purposes across all states is 15590.36'", 
+        "as": "text_annotation_2"
+      }
+    ],
+    "layer": [
+      {
+        "mark": {"type": "rule", "color": "#ccc"},
+        "encoding": {
+          "x": {"field": "Region", "type": "nominal"}
+        }
+      },
+      {
+        "mark": "line",
+        "encoding": {
+          "color": {"field": "Purpose", "type": "nominal", 
+                    "scale": {
+                        "domain": [
+                        "Business",
+                        "Holiday",
+                        "Other",
+                        "Total",
+                        "Visiting friends and relatives"
+                        ], "range": [
+                        "#e41a1c",
+                        "#984ea3",
+                        "#ff7f00",
+                        "#a6cee3",
+                        "#377eb8"
+            ] }},
+          "x": {"type": "nominal", "field": "Region"},
+          "y": {"type": "quantitative", "field": "numeric_value", "axis": null},
+          "tooltip": [
+            {"field": "Region", "type": "nominal"},
+            {"field": "Purpose", "type": "nominal"},
+            {"field": "numeric_value", "type": "quantitative"}
+          ]
+        }
+      },
+      {
+        "mark": {"type": "text", "style": "label"},
+        "encoding": {
+           
+          "text": { 
+            "condition":{"test":"purpose_selection == null","field":"text_annotation_2"},
+            "field":"text_annotation"
+            }
+        }
+      }
+    ],
+    "config": {
+      "axisX": {"domain": false, "labelAngle": 0, "tickColor": "#ccc", "title": "Region"},
+      "view": {"stroke": null}
+    }
+  }
+  

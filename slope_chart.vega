@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/QuangHaTrieu/visualisation-2/refs/heads/main/slope_chart.csv"},
+  "selection": {"region_highlight": {
+                    "type": "multi",
+                    "fields": ["region"],
+                    "bind": "legend"
+                    }
+                    },
+  "mark": {"type": "line", "point": true},
+  "width": {"step": 50},
+  "title": {
+    "text": [
+      "The most recent change in the annual",
+      "number of visitors to different regions (2023-2024)"
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "scale": {"padding": 2}
+    },
+    "y": {
+      "field": "total",
+      "type": "quantitative",
+      "axis": {"title": "Number of visitors"}
+    },
+    "color": {"field": "region", "type": "nominal"},
+    "tooltip": [{"field": "year", "type": "ordinal", "title": "Year"},
+                {"field": "total", "type": "quantitative", "title": "Number of visitors"}],
+    "opacity": {
+                "condition": {"selection": "region_highlight", "value": 1},
+                "value": 0.2}
+  }
+}
